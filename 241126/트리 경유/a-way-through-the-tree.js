@@ -1,13 +1,15 @@
 const fs = require('fs');
 
-const search = (tree,idx,start)=>{
-    if(idx===1){
-        tree[start]=1;
-        return {isPossible:true,idx}
+const search = (tree,idx)=>{
+    let dest = idx;
+    while(dest>0){
+        if(tree[dest]===1){
+            break;
+        }
+        dest/=2;
     }
-        if(tree[idx]===1)return {isPossible:false,idx}
 
-    return search(tree,Math.floor(idx/2),start)
+    return dest;
 }
 
 const main = ()=>{
@@ -21,8 +23,11 @@ const main = ()=>{
         }
     })
     arr.forEach(e=>{
-        const {isPossible,idx} = search(tree,e,e);
-        console.log(isPossible?Number(!isPossible):idx);
+        const result = search(tree,e);
+        console.log(result);
+        if(!result){
+            tree[e]=1;
+        }
     })
 }
 
