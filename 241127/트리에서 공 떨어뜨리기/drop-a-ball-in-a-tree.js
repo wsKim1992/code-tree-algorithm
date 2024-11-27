@@ -7,8 +7,7 @@ const getIndex = (tree,idx,k)=>{
     const isHaveOneChild = leftVal!==-1||rightVal!==-1;
     if(isHaveTwoChild){
         const isOdd = k%2===1;
-        const nextK = k>1?Math.floor(k/2):1;
-        return isOdd?getIndex(tree,idx*2,k>1?nextK+1:1):getIndex(tree,2*idx+1,nextK)
+        return isOdd?getIndex(tree,idx*2,(Math.floor((k+1)/2))):getIndex(tree,2*idx+1,Math.floor(k/2))
     }else if(isHaveOneChild){
         return leftVal!==-1?getIndex(tree,idx*2,k):getIndex(tree,2*idx+1,k);
     }else{
