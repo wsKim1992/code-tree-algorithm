@@ -1,8 +1,9 @@
 const fs = require("fs");
 const MAX_N=200000;
+let ans = -1;
 const getIndex = (leftTree,rightTree,idx,k)=>{
     const leftVal = leftTree[idx];
-    const rightVal = rightTree[idx*2+1];
+    const rightVal = rightTree[idx];
     const isHaveTwoChild = leftVal!==-1&&rightVal!==-1;
     const isHaveOneChild = leftVal!==-1||rightVal!==-1;
     if(isHaveTwoChild){
