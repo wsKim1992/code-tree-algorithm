@@ -4,15 +4,18 @@ let ans = -1;
 const getIndex = (leftTree,rightTree,idx,k)=>{
     const leftVal = leftTree[idx];
     const rightVal = rightTree[idx];
-    const isHaveTwoChild = leftVal!==-1&&rightVal!==-1;
-    const isHaveOneChild = leftVal!==-1||rightVal!==-1;
-    if(isHaveTwoChild){
-        const isOdd = k%2===1;
-        return isOdd?getIndex(leftTree,rightTree,leftTree[idx],(Math.floor((k+1)/2))):getIndex(leftTree,rightTree,rightTree[idx],Math.floor(k/2))
-    }else if(isHaveOneChild){
-        return leftVal!==-1?getIndex(leftTree,rightTree,leftTree[idx],k):getIndex(leftTree,rightTree,rightTree[idx],k);
+    if(leftVal==-1&&rightVal==-1){
+        ans=idx;
+        return;
+    }
+    if(leftVal!==-1){
+        getIndex(leftTree,rightTree,leftVal,k);
+    }else if(rightVal!==-1){
+        getIndex(leftTree,rightTree,rightVal,k);
+    }else if(k%2==1){
+        getIndex(leftTree,rightTree,leftVal,Math.floor((k+1)/2));
     }else{
-        return idx;
+        getIndex(leftTree,rightTree,rightVal,Math.floor(k/2));
     }
 }
 
@@ -31,7 +34,7 @@ const main = ()=>{
         }
     })
     const k = Number(inputLines[inputLines.length-1]);
-    const ans = getIndex(leftTree,rightTree,1,k);
+    getIndex(leftTree,rightTree,1,k);
     console.log(ans);
 }
 
