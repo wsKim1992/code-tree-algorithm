@@ -6,7 +6,7 @@ const search = (tree,idx)=>{
         if(tree[dest]===1){
             break;
         }
-        dest = Math.floor(dest/=2);
+        dest = Math.floor(dest/2);
     }
     return dest;
 }
