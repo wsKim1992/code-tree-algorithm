@@ -2,9 +2,7 @@ const fs = require("fs");
 
 const find = (uf,idx)=>{
     if(uf[idx]===idx)return idx;
-    const rootNode = find(uf,uf[idx]);
-    uf[idx]=rootNode;
-    return rootNode;
+    return uf[idx]=find(uf,uf[idx]);
 }
 
 const union = (uf,fr,to)=>{
