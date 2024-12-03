@@ -27,8 +27,8 @@ const main = ()=>{
     const sortedEdges = edges.sort((a,b)=>a.w-b.w);
     let ans=0;
     while(sortedEdges.length>0){
-        const edge = sortedEdges.splice(0,1);
-        const {fr,to,w} = edge[0];
+        const edge = sortedEdges.shift();
+        const {fr,to,w} = edge;
         const frRoot = find(uf,fr);
         const toRoot = find(uf,to);
         if(frRoot!==toRoot){
