@@ -15,7 +15,7 @@ const main = ()=>{
     const inputlines = fs.readFileSync(0).toString().split("\n");
     const [n,q] = inputlines[0].split(" ").map(Number);
     const tree = Array.from({length:n+1});
-    const results = Array.from({length:n+1});
+    const results = []
     const arr = []
     inputlines.slice(1).forEach(line=>{
         if(line!==''){
@@ -24,11 +24,12 @@ const main = ()=>{
     })
     arr.forEach(e=>{
         const result = search(tree,e);
-        console.log(result)
+        results.push(result);
         if(!result){
             tree[e]=1;
         }
     })
+    console.log(results.join("\n")+'\n');
 }
 
 main();
