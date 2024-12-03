@@ -6,11 +6,12 @@ const dfs = (idx,tree,d,visited)=>{
         if(!visited[children[i]]){
             visited[children[i]]=true;
             dfs(children[i],tree,d,visited)
-            d[idx][1]+=d[children[i]][0];
+            d[idx][1]+=Math.min(d[children[i]][0],d[children[i]][1]);
             d[idx][0]+=d[children[i]][1];
         }
     }
     d[idx][1]+=1;
+    d[idx][0]+=0;
 }
 
 const main = ()=>{
@@ -22,7 +23,7 @@ const main = ()=>{
     inputlines.slice(1).forEach(line=>{
         if(line!==''){
             const [x,y] = line.split(" ").map(Number);
-            tree[x].children.push(y)
+            tree[x].children.push(y);
             tree[y].children.push(x);
         }
     })
