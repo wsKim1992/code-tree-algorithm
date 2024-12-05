@@ -37,7 +37,7 @@ void dfs(int idx,int ignore_idx,int accmVal){
 int main() {
     cin>>n;
 
-    for(int i=1;i<=n;i++){
+    for(int i=1;i<n;i++){
         int x,y,dis;
         cin>>x>>y>>dis;
         edge[x].push_back({y,dis});
