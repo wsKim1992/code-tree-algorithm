@@ -63,7 +63,7 @@ int main() {
     for(int i=1;i<=n;i++){
         visited[i]=false;
     }
-    visited[a]=true;
+    visited[b]=true;
     dfs(b,a,0);    
     ans = max(ans,max_dist);
 
