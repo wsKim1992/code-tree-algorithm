@@ -13,7 +13,7 @@ int m;
 int root=-1;
 void DFS(int x){
     if(parents[x]!=-1){
-        d[x]+=d[parents[i]];
+        d[x]+=d[parents[x]];
     }
     for(int i=0;i<edges[x].size();i++){
         int y = edges[x][i];
@@ -38,7 +38,7 @@ int main() {
         cin>>c>>w;
         d[c]+=w;
     }
-    DFS(root)
+    DFS(root);
     for(int i=1;i<=n;i++){
         cout<<d[i]<<" ";
     }
