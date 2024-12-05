@@ -11,26 +11,26 @@ int n;
 vector<pair<int,int>> edge[MAX_N+1];
 bool visited[MAX_N+1];
 int max_dist;
+int dist[MAX_N+1];
 int last_node;
 int a,b;
 int ans;
 
-void dfs(int idx,int ignore_idx,int accmVal){
-    bool isLeaf = true;
+void dfs(int idx,int ignore_idx){
     for(int i=0;i<edge[idx].size();i++){
         int node,w;
         tie(node,w) = edge[idx][i];
         if(visited[node])continue;
         visited[node]=true;
-        dfs(node,ignore_idx,accmVal+w);
-        if(isLeaf)isLeaf=false;
-    }
-    if(isLeaf){
-        if(max_dist<accmVal&&ignore_idx!=idx){
-            max_dist=accmVal;
-            last_node=idx;
+        dist[node] = dist[idx]+w;
+        if(dist[node]>max_dist && node!=ignore_idx){
+            max_dist=dist[node];
+            last_node = node;
         }
+
+        dfs(node,ignore_idx);
     }
+    
     return ;
 }
 
@@ -44,7 +44,7 @@ int main() {
         edge[y].push_back({x,dis});
     }
     visited[1]=true;
-    dfs(1,-1,0);
+    dfs(1,-1);
     a=last_node;
     ans = max(ans,max_dist);
     
@@ -52,9 +52,10 @@ int main() {
     last_node=-1;
     for(int i=1;i<=n;i++){
         visited[i]=false;
+        dist[i]=0;
     }
     visited[1]=true;
-    dfs(1,a,0);
+    dfs(1,a);
     b=last_node;
     ans = max(ans,max_dist);
 
@@ -62,9 +63,10 @@ int main() {
     last_node=-1;
     for(int i=1;i<=n;i++){
         visited[i]=false;
+        dist[i]=0;
     }
     visited[b]=true;
-    dfs(b,a,0);    
+    dfs(b,a);    
     ans = max(ans,max_dist);
 
     cout<<ans<<endl;
