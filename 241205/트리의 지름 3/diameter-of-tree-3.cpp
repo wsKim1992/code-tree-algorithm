@@ -27,10 +27,8 @@ void dfs(int idx,int ignore_idx){
             max_dist=dist[node];
             last_node = node;
         }
-
         dfs(node,ignore_idx);
     }
-    
     return ;
 }
 
@@ -46,7 +44,6 @@ int main() {
     visited[1]=true;
     dfs(1,-1);
     a=last_node;
-    ans = max(ans,max_dist);
     
     max_dist=-1;
     last_node=-1;
@@ -54,9 +51,19 @@ int main() {
         visited[i]=false;
         dist[i]=0;
     }
-    visited[1]=true;
-    dfs(1,a);
+    visited[a]=true;
+    dfs(a,-1);
     b=last_node;
+    ans = max(ans,max_dist);
+
+    max_dist=-1;
+    last_node=-1;
+    for(int i=1;i<=n;i++){
+        visited[i]=false;
+        dist[i]=0;
+    }
+    visited[a]=true;
+    dfs(a,b);    
     ans = max(ans,max_dist);
 
     max_dist=-1;
