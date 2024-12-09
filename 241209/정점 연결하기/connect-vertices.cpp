@@ -5,8 +5,6 @@
 using namespace std;
 
 int uf[MAX_N+1];
-bool visited[MAX_N+1];
-int edges[2];
 int n;
 
 int find (int x){
@@ -14,32 +12,29 @@ int find (int x){
     return uf[x]=find(uf[x]);
 }
 
-int uni(int x,int y){
-    if(y<x)return uni(y,x);
+void uni(int x,int y){
     int yRoot = find(y);
     int xRoot = find(x);
-    return yRoot>xRoot?uf[yRoot]=xRoot:uf[xRoot]=yRoot;
+    uf[yRoot]=xRoot;
 }
 
 int main() {
     cin>>n;
     for(int i=1;i<=n;i++){
         uf[i]=i;
-        visited[i]=false;
     }
     for(int i=0,j=0;i<n-2;i++){
         int x,y;
         cin>>x>>y;
-        int result = uni(x,y);
-        if(!visited[result]){
-            visited[result]=true;
-            edges[j++]=result;
-        }else{
-            continue;
+        uni(x,y);
+    }
+    for(int i=2;i<=n;i++){
+        int I = find(i);
+        if(I!=find(1)){
+            cout<<1<<" "<<I<<endl;
+            break;
         }
     }
-    cout<<edges[0]<<" "<<edges[1]<<endl;
-
     // 여기에 코드를 작성해주세요.
     return 0;
 }
