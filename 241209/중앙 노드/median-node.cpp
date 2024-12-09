@@ -8,10 +8,11 @@ using namespace std;
 
 vector<int>edges[MAX_N+1];
 int n,r;
-int d[2][MAX_N+1];
+int d[MAX_N+1];
 bool visited[MAX_N+1];
 int c=-1;
 int leafNode = -1;
+
 void getCenter(int x,int subtractChildrenSize){
     if(edges[x].size()-subtractChildrenSize>=2){c=x;return;}
     bool isLeaf = true;
@@ -30,27 +31,17 @@ void getCenter(int x,int subtractChildrenSize){
 }
 
 void dfs(int x){
-    int maxVal=INT_MIN;
-    int minVal=INT_MAX;
-    bool isLeaf= true;
-    for(int i=0;i<edges[x].size();i++){
+    d[x]=1;
+    for(int i=0;i<(int)edges[x].size();i++){
         int y = edges[x][i];
         if(visited[y])continue;
         visited[y]=true;
-        isLeaf=false;
         dfs(y);
-        maxVal=max(maxVal,d[1][y]);
-        minVal=min(min(minVal,d[1][y]),d[0][y]);
-    }
-    if(isLeaf){
-        d[1][x]=1;
-        d[0][x]=d[1][x];
-
-    }else{
-        d[0][x]=minVal+1;
-        d[1][x]=maxVal+1;
+        d[x]+=d[y];
     }
 }
+
+
 
 int main() {
     cin>>n>>r;
@@ -62,6 +53,7 @@ int main() {
     }
     visited[r]=true;
     getCenter(r,0);
+    //FindMidNode(r);
     if(c==-1)c=leafNode;
     for(int i =0 ;i<=n;i++){
         visited[i]=false;
@@ -69,8 +61,13 @@ int main() {
     if(c!=-1){
         visited[c]=true;
         dfs(c);
-        cout<<d[1][c]-d[0][c]<<endl;
+        int maxVal = INT_MIN;
+        int minVal = INT_MAX;
+        for(int i =0 ;i<edges[c].size();i++){
+            maxVal=max(maxVal,d[edges[c][i]]);
+            minVal=min(minVal,d[edges[c][i]]);
+        }
+        cout<<maxVal-minVal<<endl;
     }
-    // 여기에 코드를 작성해주세요.
     return 0;
 }
