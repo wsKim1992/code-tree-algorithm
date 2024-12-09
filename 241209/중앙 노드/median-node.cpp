@@ -40,11 +40,12 @@ void dfs(int x){
         isLeaf=false;
         dfs(y);
         maxVal=max(maxVal,d[1][y]);
-        minVal=min(minVal,d[0][y]);
+        minVal=min(minVal,d[1][y]);
     }
     if(isLeaf){
-        d[0][x]=1;
         d[1][x]=1;
+        d[0][x]=d[1][x];
+
     }else{
         d[0][x]=minVal+1;
         d[1][x]=maxVal+1;
