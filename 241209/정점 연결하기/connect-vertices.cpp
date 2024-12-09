@@ -18,7 +18,7 @@ int uni(int x,int y){
     if(y<x)return uni(y,x);
     int yRoot = find(y);
     int xRoot = find(x);
-    return uf[yRoot]=xRoot;
+    return yRoot>xRoot?uf[yRoot]=xRoot:uf[xRoot]=yRoot;
 }
 
 int main() {
