@@ -25,6 +25,9 @@ void uni(int a, int b){
 
 int main() {
     cin>>n>>m>>k;
+    for(int i =1;i<=n;i++){
+        uf[i]=i;
+    }
     for(int i=0;i<m;i++){
         int x,y;
         cin>>x>>y;
