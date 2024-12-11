@@ -8,6 +8,7 @@ vector<int>edges[MAX_N+1];
 bool visited[MAX_N+1];
 vector<int>q1;
 vector<int>q2;
+
 int n;
 int num[MAX_N+1];
 int dist[2][MAX_N+1];
@@ -15,13 +16,16 @@ int dist[2][MAX_N+1];
 void DFS(int x,bool flag){
     dist[0][x]=0;
     dist[1][x]=num[x];
-    flag?q1.push_back(x):q2.push_back(x);
+    if(flag){q1.push_back(x);}
     for(int i=0;i<edges[x].size();i++){
         int y = edges[x][i];
         if(visited[y])continue;
         visited[y]=true;
         DFS(y,!flag);
-        dist[0][x]+=dist[1][y];
+        if(flag&&dist[1][y]>dist[0][y]){
+            q2.push_back(y);
+        }
+        dist[0][x]+=max(dist[1][y],dist[0][y]);
         dist[1][x]+=dist[0][y];
     }
 }
@@ -45,13 +49,11 @@ int main() {
         for (auto iter = q1.begin(); iter != q1.end(); iter++) {		
             cout << *iter << " ";
         }
-        cout<<endl;
     }else{
         sort(q2.begin(),q2.end());
         for (auto iter = q2.begin(); iter != q2.end(); iter++) {		
-            cout << *iter <<" ";
+            cout << *iter << " ";
         }
-        cout<<endl;
     }
     return 0;
 }
