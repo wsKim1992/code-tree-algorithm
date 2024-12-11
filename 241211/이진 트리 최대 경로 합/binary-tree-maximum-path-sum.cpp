@@ -10,22 +10,30 @@ bool visited[MAX_N+1];
 int dist[2][MAX_N+1];
 int n;
 int num[MAX_N+1];
-
+int ans = 0;
 void DFS(int x){
     dist[0][x]=0;
     dist[1][x]=num[x];
-    int left=0;int right=0;
+    int biggestBranch=0;
+    int restBranch=0;
+    int localMaxVal = -1001;
     for(int i=0;i<edges[x].size();i++){
         int y = edges[x][i];
         if(visited[y])continue;
         visited[y]=true;
         DFS(y);
-        int localMaxVal = -1001;
-        localMaxVal=max(dist[0][y],dist[1][y]);
-        dist[0][x]=max(localMaxVal,dist[0][x]);
-        dist[1][x]=max(dist[1][x],dist[1][y]+dist[1][x]);
+        dist[0][x]=max(dist[0][y],dist[1][y]);
+        if(biggestBranch<dist[1][y]){
+            restBranch=biggestBranch;
+            biggestBranch=dist[1][y];
+        }else{
+            restBranch=dist[1][y];
+        }
     }
-   
+    dist[1][x]+=biggestBranch;
+    localMaxVal=max(dist[1][x],dist[0][x]);
+    localMaxVal=max(localMaxVal,restBranch+dist[1][x]);
+    ans=max(localMaxVal,ans);
 }
 
 int main() {
@@ -41,6 +49,6 @@ int main() {
     }
     visited[1]=true;
     DFS(1);
-    cout<<max(dist[1][1],dist[0][1])<<endl;
+    cout<<ans<<endl;
     return 0;
 }
