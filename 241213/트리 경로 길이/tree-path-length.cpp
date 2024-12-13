@@ -38,7 +38,7 @@ int LCA(int x, int y){
         if(parent[h][x]!=parent[h][y]){
             x=parent[h][x];
             y=parent[h][y];
-            ans+=2;
+            ans+=2*(1<<h);
         }
     }
 
