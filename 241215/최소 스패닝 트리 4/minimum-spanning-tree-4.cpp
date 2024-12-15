@@ -36,6 +36,7 @@ int main() {
         }
     }
     int ans=0;
+    int numOfEdges = 0;
     sort(edges+1,edges+m+1);
     for(int i=0;i<m;i++){
         int x,y,cost;
@@ -45,9 +46,10 @@ int main() {
         if(rootX!=rootY){
             uni(x,y);
             ans+=cost;
+            numOfEdges+=1;
         }
     }
-    if(ans>0){
+    if(ans>0&&numOfEdges==n-1){
         cout<<ans<<endl;
     }else{
         cout<<-1<<endl;
