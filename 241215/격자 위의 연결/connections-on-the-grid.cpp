@@ -24,7 +24,7 @@ int main() {
     int ans = 0;
     int cnt=0;
     cin>>n>>m;
-    tuple<int,int,int> edges[(MAX_NM+1)*(MAX_NM+1)];
+    tuple<int,int,int> edges[MAX_NM*MAX_NM+MAX_NM*MAX_NM];
     for(int i=1;i<=n;i++){
         int buffer = (i-1)*m;
         for(int j=1;j<=m-1;j++){
