@@ -1,12 +1,12 @@
 #include <iostream>
-#include <algorithm>
 #include <tuple>
+#include <algorithm>
+
 #define MAX_N 10000
 #define MAX_M 100000
 using namespace std;
 
 int n,m;
-
 tuple<int,int,int>edges[MAX_M+1];
 int uf[MAX_N+1];
 char type[MAX_N+1];
@@ -25,25 +25,28 @@ void uni(int x,int y){
 int main() {
     cin>>n>>m;
     for(int i = 1;i<=n;i++){
-        cin>>type[i];
+        cin >> type[i];
     }
-    for(int i = 1;i<=n;i++){
-        uf[i]=i;
-    }
+    
     for(int i =0;i<m;i++){
-        int x,y,cost;
-        cin>>x>>y>>cost;
+        int x, y, cost;
+        cin >> x >> y >> cost;
         edges[i]=make_tuple(cost,x,y);
     }
     int ans=0;
-    sort(edges+1,edges+m+1);
+    sort(edges,edges+m);
+
+    for(int i = 1;i<=n;i++){
+        uf[i]=i;
+    }
+
     for(int i=0;i<m;i++){
-        int x,y,cost;
+        int x, y, cost;
         tie(cost,x,y)=edges[i];
         if(type[x]==type[y])continue;
         if(find(x)!=find(y)){
-            uni(x,y);
             ans+=cost;
+            uni(x,y);
         }
     }
     bool isAllConnected=true;
@@ -53,9 +56,9 @@ int main() {
         if(x!=y){isAllConnected=false;}
     }
     if(isAllConnected){
-        cout<<ans<<endl;
+        cout<<ans;
     }else{
-        cout<<-1<<endl;
+        cout<<-1;
     }
     return 0;
 }
