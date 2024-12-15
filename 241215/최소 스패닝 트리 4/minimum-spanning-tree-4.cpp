@@ -41,6 +41,7 @@ int main() {
     for(int i=0;i<m;i++){
         int x,y,cost;
         tie(cost,x,y)=edges[i];
+        if(type[x]==type[y])continue;
         int rootX = find(x);
         int rootY = find(y);
         if(rootX!=rootY){
@@ -49,7 +50,13 @@ int main() {
             numOfEdges+=1;
         }
     }
-    if(ans>0&&numOfEdges==n-1){
+    bool isAllConnected=true;
+    for(int i=2;i<=n;i++){
+        int x = find(1);
+        int y = find(i);
+        if(x!=y){isAllConnected=false;}
+    }
+    if(isAllConnected){
         cout<<ans<<endl;
     }else{
         cout<<-1<<endl;
