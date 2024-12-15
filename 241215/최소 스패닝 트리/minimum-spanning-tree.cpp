@@ -18,7 +18,7 @@ int find(int x){
 void uni(int x,int y){
     int rootX = find(x);
     int rootY = find(y);
-    uf[x]=y;
+    uf[x]=rootY;
 }
 
 bool edgeCompare(pair<pair<int,int>,int>a,pair<pair<int,int>,int>b){
