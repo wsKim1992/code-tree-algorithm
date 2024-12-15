@@ -31,9 +31,7 @@ int main() {
     for(int i =0;i<m;i++){
         int x,y,z;
         cin>>x>>y>>z;
-        if(type[x]!=type[y]){
-            edges[i]=make_tuple(z,x,y);
-        }
+        edges[i]=make_tuple(z,x,y);
     }
     int ans=0;
     int numOfEdges = 0;
