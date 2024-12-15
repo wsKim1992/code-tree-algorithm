@@ -44,7 +44,7 @@ int main() {
             edges[cnt++]=make_tuple(w,first,second);
         }
     }
-    sort(edges,edges+n*m+1);
+    sort(edges,edges+cnt);
     for(int i=1;i<=n*m;i++){
         uf[i]=i;
     }
