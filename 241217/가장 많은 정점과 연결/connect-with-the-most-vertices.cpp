@@ -69,7 +69,7 @@ int main() {
             ans+=cost;
         }
     }
-    if(ans<k){cout<<ans<<endl;}
+    if(ans<=k){cout<<ans<<endl;}
     else{
         cout<<"NO"<<endl;
     }
