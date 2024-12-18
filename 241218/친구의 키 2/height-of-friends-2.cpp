@@ -21,7 +21,6 @@ int main() {
     for(int i=1;i<=n;i++){
         if(!inDegree[i]){
             q.push(i);
-            break;
         }
     }
     int ans=0;
