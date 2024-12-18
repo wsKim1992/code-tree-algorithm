@@ -37,8 +37,8 @@ int main() {
         for(int i=0;i<(int)graph[x].size();i++){
             int len,y;
             tie(len,y)=graph[x][i];
-            if(dist[y]>=len+dist[x]){
-                dist[y]=len+dist[x];
+            if(dist[y]>=len){
+                dist[y]=len;
                 pq.push(make_pair(-len,y));
             }
         }
