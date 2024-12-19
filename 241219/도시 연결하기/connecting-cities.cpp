@@ -22,6 +22,7 @@ int main() {
         }
     }
     int startPoint =-1;
+    int newN=0;
     for(int i=0;i<n;i++){
         int prev=-1;int w=0;
         for(int j =0;j<m;j++){
@@ -30,6 +31,7 @@ int main() {
                     w+=1;
                 }
             }else if(M[i][j]==1){
+                newN+=1;
                 int now = m*i+j;
                 if(prev!=-1){
                     edges[prev].push_back(make_pair(w,now));
@@ -70,12 +72,14 @@ int main() {
     if(startPoint!=-1){
         pq.push(make_pair(-0,startPoint));
         dist[startPoint]=0;
+        int cnt=0;
         while(!pq.empty()){
             int cost,x;
             tie(cost,x)=pq.top();
             pq.pop();
             if(visited[x])continue;
             visited[x]=true;
+            cnt+=1;
             cost=-cost;
             ans+=cost;
             for(int i=0;i<(int)edges[x].size();i++){
@@ -87,7 +91,13 @@ int main() {
                 }
             }
         }
+        if(newN==cnt){
+            cout<<ans<<endl;
+        }else{
+            cout<<"-1"<<endl;
+        }
+        return 0;
     }
-    cout<<ans<<endl;
+    cout<<"-1"<<endl;
     return 0;
 }
