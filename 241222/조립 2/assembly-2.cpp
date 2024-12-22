@@ -12,7 +12,7 @@ vector<int>graph[MAX_N+1];
 queue<int>q;
 priority_queue<int>ans;
 int inDegree[MAX_N+1];
-
+bool isHaveAlready[MAX_N+1];
 int main() {
     cin>>n>>m;
     for(int i=0;i<m;i++){
@@ -29,16 +29,16 @@ int main() {
     for(int i=0;i<nodes;i++){
         int y;
         cin>>y;
-        if(inDegree[y]==0){
-            ans.push(-y);
-            q.push(y);
-        }
+        ans.push(-y);
+        q.push(y);
+        isHaveAlready[y]=true;
     }
     while(!q.empty()){
         int x= q.front();
         q.pop();
         for(int i=0;i<(int)graph[x].size();i++){
             int y = graph[x][i];
+            if(isHaveAlready[y])continue;
             inDegree[y]--;
             if(inDegree[y]==0){
                 q.push(y);
