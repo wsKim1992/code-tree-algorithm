@@ -22,12 +22,8 @@ int main() {
         edges[x].push_back(y);
         inDegree[y]++;
     }
-    for(int i=1;i<=n;i++){
-        if(inDegree[i]==0){
-            dist[i]=1;
-            q.push(i);
-        }
-    }
+    dist[1]=1;
+    q.push(1);
     while(!q.empty()){
         int x= q.front();
         q.pop();
@@ -40,9 +36,7 @@ int main() {
             }
         }
     }
-    for(int i=1;i<=n;i++){
-        ans = max(ans,dist[i]);
-    }
+    ans = dist[n];
     long operends = pow(10,9)+7;
     cout<<ans%operends<<endl;
     return 0;
