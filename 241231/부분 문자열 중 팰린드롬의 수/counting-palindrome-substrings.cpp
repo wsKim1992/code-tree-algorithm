@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#define MAX_N 200000
+#define MAX_N 200001
 using namespace std;
 
 int main() {
@@ -15,7 +15,7 @@ int main() {
     input_str+="#";
     int n = (int)input_str.size();
     int A[MAX_N];int r=-1;int p=-1;
-    int ans = 0;
+    long long ans = 0;
 
     for(int i=0;i<n;i++){
         if(r<i){A[i]=0;}
