@@ -22,16 +22,19 @@ int main() {
         else{
             int ii = 2*p-i;
             A[i]=min(r-i,A[ii]);
-            ans+=(A[i]/2);
         }
         while(i-A[i]-1>=0&&i+A[i]+1<n&&input_str[i-A[i]-1]==input_str[i+A[i]+1]){
             A[i]++;
-            ans+=1;
         }
         if(r<i+A[i]){
             r=A[i]+i;
             p=i;
         }
+    }
+    for(int i=0;i<n;i++){
+        int max_len = 2*A[i]+1;
+        int l = max_len/2;
+        ans+=(l+1)/2;
     }
     cout<<ans<<endl;
     return 0;
